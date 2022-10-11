@@ -1,3 +1,5 @@
+ARG CACHEBUST=1
+
 FROM node:7.8.0
 WORKDIR /opt
 ADD . /opt
