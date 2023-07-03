@@ -26,7 +26,7 @@ pipeline {
                         case "dev": PORT = '3001'; break
                     }            
                     sh "docker rm -f node${env.BRANCH_NAME} || echo 'No container found'"
-                    sh "docker run -d --name --expose ${PORT} -p ${PORT}:3000 node${env.BRANCH_NAME}:v1.0"
+                    sh "docker run -d --name node${env.BRANCH_NAME} --expose ${PORT} -p ${PORT}:3000 node${env.BRANCH_NAME}:v1.0"
                 }
             }
         }
