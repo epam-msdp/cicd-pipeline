@@ -13,6 +13,8 @@ pipeline {
     stage('build') {
       steps {
         sh 'cd scripts'
+        sh '''
+     sh chmod +x build.sh'''
       }
     }
 
