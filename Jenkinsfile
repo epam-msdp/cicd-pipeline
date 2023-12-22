@@ -15,7 +15,7 @@ pipeline {
         sh 'cd scripts'
         sh '''
     chmod +x scripts/build.sh'''
-        sh 'sh \'script scripts/build.sh\''
+        sh 'script scripts/build.sh'
       }
     }
 
