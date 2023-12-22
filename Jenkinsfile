@@ -10,5 +10,11 @@ pipeline {
       }
     }
 
+    stage('build') {
+      steps {
+        sh 'cd scripts sh(\'chmod +x build.sh\')'
+      }
+    }
+
   }
 }
