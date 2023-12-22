@@ -25,5 +25,17 @@ pipeline {
       }
     }
 
+    stage('docker build') {
+      steps {
+        script {
+          docker.build("${registry}:${env.BUILD_ID}")
+        }
+
+      }
+    }
+
+  }
+  environment {
+    registry = 'meliaszkowalska/mek_docker'
   }
 }
