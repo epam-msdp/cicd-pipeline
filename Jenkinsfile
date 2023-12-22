@@ -34,6 +34,15 @@ pipeline {
       }
     }
 
+    stage('docker push') {
+      steps {
+        script {
+          docker.build("${registry}:latest")
+        }
+
+      }
+    }
+
   }
   environment {
     registry = 'meliaszkowalska/mek_docker'
