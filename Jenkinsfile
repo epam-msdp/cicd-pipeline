@@ -35,6 +35,6 @@ pipeline {
 
   }
   environment {
-    DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
+    DOCKERHUB_CREDENTIALS = credentials('dhub')
   }
 }
