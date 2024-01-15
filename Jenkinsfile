@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  environment {     
-    DOCKERHUB_CREDENTIALS= credentials('dockerhub-credentials')     
-  }
   stages {
     stage('build') {
       steps {
@@ -21,18 +18,23 @@ pipeline {
         sh 'docker build -t KAN_T_image'
       }
     }
+
     stage('push to docker') {
       steps {
         script {
-            def nodeAppDockerfilePath = 'src/Dockerfile'    
-            // Build the Node.js app Docker image
-            sh "docker build -t ttkata/KAN_T_image:$BUILD_NUMBER -f ${nodeAppDockerfilePath} ."
-            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin docker.io'                 
-            sh 'docker push ttkata/KAN_T_image:$BUILD_NUMBER'                 
-            sh 'docker logout'
+          def nodeAppDockerfilePath = 'src/Dockerfile'
+          // Build the Node.js app Docker image
+          sh "docker build -t ttkata/KAN_T_image:$BUILD_NUMBER -f ${nodeAppDockerfilePath} ."
+          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin docker.io'
+          sh 'docker push ttkata/KAN_T_image:$BUILD_NUMBER'
+          sh 'docker logout'
         }
+
       }
     }
 
+  }
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
   }
 }
