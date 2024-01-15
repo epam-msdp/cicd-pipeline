@@ -23,12 +23,14 @@ pipeline {
     }
     stage('push to docker') {
       steps {
-          def nodeAppDockerfilePath = 'src/Dockerfile'    
-          // Build the Node.js app Docker image
-          sh "docker build -t ttkata/KAN_T_image:$BUILD_NUMBER -f ${nodeAppDockerfilePath} ."
-          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin docker.io'                 
-          sh 'docker push ttkata/KAN_T_image:$BUILD_NUMBER'                 
-          sh 'docker logout'
+        script {
+            def nodeAppDockerfilePath = 'src/Dockerfile'    
+            // Build the Node.js app Docker image
+            sh "docker build -t ttkata/KAN_T_image:$BUILD_NUMBER -f ${nodeAppDockerfilePath} ."
+            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin docker.io'                 
+            sh 'docker push ttkata/KAN_T_image:$BUILD_NUMBER'                 
+            sh 'docker logout'
+        }
       }
     }
 
